@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "StarWarsApp"
 include(":app")
+include(":messageapp")
