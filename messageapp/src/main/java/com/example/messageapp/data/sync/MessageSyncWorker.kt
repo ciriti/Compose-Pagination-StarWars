@@ -16,7 +16,7 @@ class MessageSyncWorker(
 
     override suspend fun doWork(): Result {
         return try {
-            messageRepository.syncPendingMessages()
+            messageRepository.performFullSync()
             Result.success()
         } catch (e: Exception) {
             if (runAttemptCount < 3) {

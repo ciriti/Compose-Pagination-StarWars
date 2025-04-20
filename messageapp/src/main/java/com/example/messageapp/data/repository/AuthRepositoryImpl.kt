@@ -1,6 +1,6 @@
 package com.example.messageapp.data.repository
 
-import com.example.messageapp.data.datasource.remote.AuthApi
+import com.example.messageapp.data.remote.AuthApi
 import com.example.messageapp.domain.security.SecureStorage
 import com.example.messageapp.domain.repository.AuthRepository
 import kotlinx.coroutines.flow.Flow

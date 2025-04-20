@@ -1,4 +1,4 @@
-package com.example.messageapp
+package com.example.uploadmanager
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,31 +11,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.lifecycleScope
-import com.example.messageapp.data.repository.ConnectivityRepository
-import com.example.messageapp.domain.sync.MessageSyncManager
-import com.example.messageapp.ui.theme.StarWarsAppTheme
-import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
+import com.example.uploadmanager.ui.theme.StarWarsAppTheme
 
 class MainActivity : ComponentActivity() {
-
-    private val connectivityRepository by inject<ConnectivityRepository>()
-    private val messageSyncManager by inject<MessageSyncManager>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        messageSyncManager.monitorNetworkAndSync()
-
-        lifecycleScope.launch {
-            connectivityRepository
-                .isConnected
-                .collect { isConnected ->
-                    println("========== isConnected: $isConnected")
-                }
-        }
-
         enableEdgeToEdge()
         setContent {
             StarWarsAppTheme {

@@ -4,9 +4,9 @@ import android.content.Context
 import android.net.ConnectivityManager
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
-import com.example.messageapp.data.network.ConnectivityObserverImpl
-import com.example.messageapp.data.network.ConnectivityRepository
-import com.example.messageapp.data.network.ConnectivityRepositoryImpl
+import com.example.messageapp.data.connectivity.ConnectivityObserverImpl
+import com.example.messageapp.data.repository.ConnectivityRepository
+import com.example.messageapp.data.repository.ConnectivityRepositoryImpl
 import com.example.messageapp.data.repository.MessageRepositoryImpl
 import com.example.messageapp.data.sync.MessageSyncManagerImpl
 import com.example.messageapp.data.sync.MessageSyncWorker
