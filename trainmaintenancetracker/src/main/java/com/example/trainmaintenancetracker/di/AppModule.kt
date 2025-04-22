@@ -17,6 +17,7 @@ import com.example.trainmaintenancetracker.domain.data.datasource.local.LocalTas
 import com.example.trainmaintenancetracker.domain.data.datasource.remote.RemoteTaskDataSource
 import com.example.trainmaintenancetracker.domain.data.repository.ConnectivityRepository
 import com.example.trainmaintenancetracker.domain.data.repository.TaskRepository
+import com.example.trainmaintenancetracker.ui.screen.taskdetail.TaskDetailViewModel
 import com.example.trainmaintenancetracker.ui.screen.tasks.TaskViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -57,4 +58,5 @@ val appModule = module {
     single<RemoteTaskDataSource> { RemoteTaskDataSourceImpl(get()) }
 
     viewModel { TaskViewModel(get(), get(), get()) }
+    viewModel { TaskDetailViewModel(get(), get()) }
 }

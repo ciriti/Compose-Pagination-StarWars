@@ -11,7 +11,7 @@ fun NavGraphBuilder.tasksRoute(
     composable(Route.Tasks.route) {
         TaskRoute(
             onTaskSelected = { taskId ->
-                navController.navigate(Route.TaskDetail.taskDetail(taskId)){
+                navController.navigate(Route.TaskDetail.createRoute(taskId)){
                     popUpTo(Route.Tasks.route) {
                         saveState = true
                     }

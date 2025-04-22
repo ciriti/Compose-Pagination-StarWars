@@ -8,4 +8,9 @@
     <string name="no_tasks_available">No tasks available</string>
     <string name="connect_to_sync_tasks">Connect to sync tasks</string>
     <string name="refresh">Refresh</string>
+    <string name="task_details">Task Details</string>
+    <string name="description">Description</string>
+    <string name="due_date">Due Date</string>
+    <string name="location">Location</string>
+    <string name="back">Back</string>
 </resources>
