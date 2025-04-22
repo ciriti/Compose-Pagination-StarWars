@@ -56,7 +56,7 @@ fun TaskRoute(
         viewModel.processIntent(TasksIntent.LoadTasks)
     }
 
-    TaskScreenContent1(
+    TaskScreenContent(
         state = state,
         onTaskSelected = onTaskSelected,
         onRefresh = { viewModel.processIntent(TasksIntent.RefreshTasks) },
@@ -66,7 +66,7 @@ fun TaskRoute(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TaskScreenContent1(
+fun TaskScreenContent(
     state: TasksState,
     onTaskSelected: (String) -> Unit,
     onRefresh: () -> Unit,
@@ -145,40 +145,6 @@ private fun TaskListContent(
 }
 
 @Composable
-private fun TaskItem(
-    task: Task,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    Card(
-        modifier = modifier
-            .padding(8.dp)
-            .fillMaxWidth()
-            .clickable { onClick() },
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant
-        ),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 4.dp
-        )
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Text(
-                text = task.taskType,
-                style = MaterialTheme.typography.bodySmall,
-                fontWeight = FontWeight.Bold
-            )
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(text = stringResource(R.string.train, task.trainId))
-            Text(text = stringResource(R.string.priority, task.priorityLevel))
-            Text(text = stringResource(R.string.due, task.dueDate))
-        }
-    }
-}
-
-@Composable
 private fun EmptyContent(
     isConnected: Boolean,
     onRefresh: () -> Unit,
@@ -203,7 +169,7 @@ private fun EmptyContent(
 @Preview(name = "SuccessCase")
 @Composable
 fun TaskScreenSuccessPreview() {
-    TaskScreenContent1(
+    TaskScreenContent(
         state = TasksState(tasks = mockTasks),
         onTaskSelected = {},
         onRefresh = {}
@@ -213,7 +179,7 @@ fun TaskScreenSuccessPreview() {
 @Preview(name = "SuccessCaseEmptyList")
 @Composable
 fun TaskScreenSuccessEmptyListPreview() {
-    TaskScreenContent1(
+    TaskScreenContent(
         state = TasksState(tasks = emptyList()),
         onTaskSelected = {},
         onRefresh = {}
@@ -223,7 +189,7 @@ fun TaskScreenSuccessEmptyListPreview() {
 @Preview(name = "LoadingCase")
 @Composable
 fun TaskScreenLoadingPreview() {
-    TaskScreenContent1(
+    TaskScreenContent(
         state = TasksState(isLoading = true),
         onTaskSelected = {},
         onRefresh = {}
@@ -233,7 +199,7 @@ fun TaskScreenLoadingPreview() {
 @Preview(name = "ErrorCase")
 @Composable
 fun TaskScreenErrorPreview() {
-    TaskScreenContent1(
+    TaskScreenContent(
         state = TasksState(error = "Error loading tasks"),
         onTaskSelected = {},
         onRefresh = {}
