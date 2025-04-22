@@ -7,7 +7,6 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -77,7 +76,7 @@ fun TaskDetailScreen(
                 state.error != null -> ErrorContent(errorMessage = state.error, onRetry = onRetry)
                 state.task != null -> TaskDetailContent(
                     task = state.task,
-                    modifier = Modifier.padding(padding)
+                    modifier = Modifier.fillMaxWidth()
                 )
             }
         }
@@ -91,7 +90,7 @@ private fun TaskDetailContent(
 ) {
     Column(
         modifier = modifier
-            .fillMaxSize()
+            .fillMaxWidth()
             .verticalScroll(rememberScrollState())
             .padding(16.dp)
     ) {

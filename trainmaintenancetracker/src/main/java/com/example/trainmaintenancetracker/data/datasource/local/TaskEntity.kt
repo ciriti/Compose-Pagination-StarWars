@@ -1,9 +1,13 @@
 package com.example.trainmaintenancetracker.data.datasource.local
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "tasks")
+@Entity(
+    tableName = "tasks",
+    indices = [Index(value = ["taskId"], unique = true)]
+)
 data class TaskEntity(
     @PrimaryKey
     val taskId: String,

@@ -21,8 +21,8 @@ class TaskSyncManagerImpl(
     private val localDataSource: LocalTaskDataSource,
     private val remoteDataSource: RemoteTaskDataSource,
     private val connectivityRepository: ConnectivityRepository,
-    private val coroutineScope: CoroutineScope, // with work manager this param is not necessary
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO, // with work manager this param is not necessary
+    private val coroutineScope: CoroutineScope, // with workmanager this param is not necessary
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO, // with workmanager this param is not necessary
 ) : TaskSyncManager {
 
     override fun schedulePeriodicSync(intervalHours: Long) {
