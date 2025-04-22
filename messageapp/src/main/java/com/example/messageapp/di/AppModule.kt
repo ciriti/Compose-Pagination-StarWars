@@ -24,7 +24,7 @@ val appModule = module {
     single { androidApplication().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager }
     single<ConnectivityObserver> { ConnectivityObserverImpl(get()) }
     single<ConnectivityRepository> { ConnectivityRepositoryImpl(get(), get(), get()) }
-    single<MessageRepository> { MessageRepositoryImpl(get(), get()) }
+//    single<MessageRepository> { MessageRepositoryImpl(get()) }
 
     // Add worker factory
     factory { (context: Context, params: WorkerParameters) ->

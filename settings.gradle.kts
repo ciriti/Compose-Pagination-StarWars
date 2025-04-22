@@ -23,3 +23,5 @@ rootProject.name = "StarWarsApp"
 include(":app")
 include(":messageapp")
 include(":uploadmanager")
+include(":googlenoteclone")
+include(":trainmaintenancetracker")

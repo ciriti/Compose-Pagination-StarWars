@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Train Maintenance Tracker</string>
+    <string name="maintenance_tasks">Maintenance Tasks</string>
+    <string name="train">Train: %1$s</string>
+    <string name="priority">Priority: %1$s</string>
+    <string name="due">Due: %1$s</string>
+    <string name="offline_mode_data_may_not_be_up_to_date">Offline Mode - Data may not be up to date</string>
+    <string name="no_tasks_available">No tasks available</string>
+    <string name="connect_to_sync_tasks">Connect to sync tasks</string>
+    <string name="refresh">Refresh</string>
+</resources>
