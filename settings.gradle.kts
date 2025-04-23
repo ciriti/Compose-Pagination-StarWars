@@ -19,9 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "StarWarsApp"
-include(":app")
-include(":messageapp")
-include(":uploadmanager")
-include(":googlenoteclone")
+rootProject.name = "TrainMaintenanceTracker"
 include(":trainmaintenancetracker")

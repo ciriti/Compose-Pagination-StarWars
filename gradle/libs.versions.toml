@@ -17,11 +17,8 @@ room-version = "2.6.1"
 kotlinxCoroutinesTest = "1.9.0"
 mockk = "1.13.13"
 turbine = "1.2.0"
-compileSdk = "35"
 minSdk = "24"
 targetSdk = "34"
-jvmTarget = "11"
-desugarJdkLibs = "2.0.3"
 workRuntimeKtx = "2.10.0"
 
 [libraries]
@@ -52,11 +49,9 @@ retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", ver
 room = { group = "androidx.room", name = "room-runtime", version.ref = "room-version" }
 room-ktx = {group = "androidx.room", name = "room-ktx", version.ref = "room-version"}
 room-annotation = { group = "androidx.room", name = "room-compiler", version.ref = "room-version" }
-desugar-jdk-libs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "desugarJdkLibs" }
 
 androidx-navigation-testing = { group = "androidx.navigation", name = "navigation-testing", version.ref = "navigation-compose" }
 androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
-androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 koin-test = { group = "io.insert-koin", name = "koin-test", version.ref = "koin" }

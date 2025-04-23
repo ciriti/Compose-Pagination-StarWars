@@ -18,14 +18,4 @@ class RoomTaskDataSourceImplTest {
     fun `getTaskById should return error when task not found`() = runBlocking {
         // TODO: Implement test
     }
-
-    @Test
-    fun `getTasks should return all tasks from dao`() = runBlocking {
-        // TODO: Implement test
-    }
-
-    @Test
-    fun `getTasks should propagate dao exceptions`() = runBlocking {
-        // TODO: Implement test
-    }
 }

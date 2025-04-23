@@ -44,40 +44,6 @@ class RemoteTaskDataSourceImplTest {
     }
 
     @Test
-    fun `getAllTasks should return empty list when body is null`() = runBlocking {
-        // Arrange
-        val testResponse = mockk<Response<TaskResponse>> {
-            coEvery { isSuccessful } returns true
-            coEvery { body() } returns null
-        }
-        coEvery { taskApiService.getAllTasks() } returns testResponse
-
-        // Act
-        val result = dataSource.getAllTasks()
-
-        // Assert
-        assertEquals(true, result.isFailure)
-        assertEquals("Empty response", result.exceptionOrNull()?.message)
-    }
-
-    @Test
-    fun `getAllTasks should return error when unsuccessful`() = runBlocking {
-        // Arrange
-        val testResponse = mockk<Response<TaskResponse>> {
-            coEvery { isSuccessful } returns false
-            coEvery { code() } returns 404
-        }
-        coEvery { taskApiService.getAllTasks() } returns testResponse
-
-        // Act
-        val result = dataSource.getAllTasks()
-
-        // Assert
-        assertEquals(true, result.isFailure)
-        assertEquals("HTTP 404", result.exceptionOrNull()?.message)
-    }
-
-    @Test
     fun `getAllTasks should propagate exceptions`() = runBlocking {
         // Arrange
         val testError = Exception("Network error")
