@@ -30,6 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.trainmaintenancetracker.R
 import com.example.trainmaintenancetracker.domain.model.Task
+import com.example.trainmaintenancetracker.domain.model.isNotEmpty
 import com.example.trainmaintenancetracker.ui.component.ErrorContent
 import com.example.trainmaintenancetracker.ui.component.LoadingIndicator
 import com.example.trainmaintenancetracker.ui.component.OfflineBanner
@@ -74,10 +75,11 @@ fun TaskDetailScreen(
             when {
                 state.isLoading -> LoadingIndicator()
                 state.error != null -> ErrorContent(errorMessage = state.error, onRetry = onRetry)
-                state.task != null -> TaskDetailContent(
+                state.task.isNotEmpty -> TaskDetailContent(
                     task = state.task,
                     modifier = Modifier.fillMaxWidth()
                 )
+                else -> Text("No task loaded")
             }
         }
     }
@@ -111,8 +113,8 @@ private fun TaskDetailContent(
                 )
                 Spacer(modifier = Modifier.height(8.dp))
 
-                DetailRow(label = stringResource(R.string.train), value = task.trainId)
-                DetailRow(label = stringResource(R.string.priority), value = task.priorityLevel)
+                DetailRow(label = stringResource(R.string.train_detail), value = task.trainId)
+                DetailRow(label = stringResource(R.string.priority_detail), value = task.priorityLevel)
                 DetailRow(label = stringResource(R.string.location), value = task.location)
                 DetailRow(label = stringResource(R.string.due_date), value = task.dueDate)
 

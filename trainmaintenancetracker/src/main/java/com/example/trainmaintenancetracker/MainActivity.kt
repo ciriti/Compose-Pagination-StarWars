@@ -13,6 +13,7 @@ import com.example.trainmaintenancetracker.domain.data.repository.ConnectivityRe
 import com.example.trainmaintenancetracker.ui.navigation.AppNavHost
 import com.example.trainmaintenancetracker.ui.navigation.Route
 import com.example.trainmaintenancetracker.ui.theme.TrainMaintenanceTheme
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
@@ -39,10 +40,9 @@ class MainActivity : ComponentActivity() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 connectivityRepository
                     .isConnected
-                    .collect { isConnected ->
-                        if (isConnected) {
-                            syncManager.triggerImmediateSync()
-                        }
+                    .filter { it }
+                    .collect { _ ->
+                        syncManager.triggerImmediateSync()
                     }
             }
         }

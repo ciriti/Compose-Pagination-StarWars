@@ -12,3 +12,16 @@ data class Task(
     val dueDate: String,
     val description: String
 )
+
+val EmptyTask = Task(
+    taskId = "",
+    trainId = "",
+    taskType = "",
+    priorityLevel = "",
+    location = "",
+    dueDate = "",
+    description = ""
+)
+
+val Task.isNotEmpty: Boolean
+    get() = this != EmptyTask

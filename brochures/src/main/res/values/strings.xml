@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Brochures</string>
+    <string name="filter_by_distance">Filter by distance (less than 5km)</string>
+    <string name="error_loading_brochures">Failed to load brochures. Please try again.</string>
+</resources>

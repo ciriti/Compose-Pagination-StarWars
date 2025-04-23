@@ -32,6 +32,7 @@ import com.example.trainmaintenancetracker.domain.model.Task
 import com.example.trainmaintenancetracker.ui.component.ErrorContent
 import com.example.trainmaintenancetracker.ui.component.LoadingIndicator
 import com.example.trainmaintenancetracker.ui.component.OfflineBanner
+import kotlinx.collections.immutable.toImmutableList
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -140,7 +141,7 @@ fun EmptyContent(
 @Composable
 fun TaskScreenSuccessPreview() {
     TaskScreenContent(
-        state = TasksState(tasks = mockTasks),
+        state = TasksState(tasks = mockTasks.toImmutableList()),
         onTaskSelected = {},
         onRefresh = {}
     )
@@ -150,7 +151,7 @@ fun TaskScreenSuccessPreview() {
 @Composable
 fun TaskScreenSuccessEmptyListPreview() {
     TaskScreenContent(
-        state = TasksState(tasks = emptyList()),
+        state = TasksState(tasks = emptyList<Task>().toImmutableList()),
         onTaskSelected = {},
         onRefresh = {}
     )

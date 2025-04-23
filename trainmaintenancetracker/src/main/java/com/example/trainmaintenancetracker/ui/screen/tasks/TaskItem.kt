@@ -42,7 +42,7 @@ fun TaskItem(
         ) {
             Text(
                 text = task.taskType,
-                style = MaterialTheme.typography.bodySmall,
+                style = MaterialTheme.typography.bodyLarge,
                 fontWeight = FontWeight.Bold
             )
             Spacer(modifier = Modifier.height(4.dp))

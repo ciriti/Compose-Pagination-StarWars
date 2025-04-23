@@ -5,6 +5,7 @@ import com.example.trainmaintenancetracker.data.sync.TaskSyncManager
 import com.example.trainmaintenancetracker.domain.data.repository.ConnectivityRepository
 import com.example.trainmaintenancetracker.domain.data.repository.TaskRepository
 import com.example.trainmaintenancetracker.ui.component.BaseViewModel
+import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.onStart
@@ -33,12 +34,12 @@ class TaskViewModel(
                     setState { copy(isLoading = false, error = error.message) }
                     setEffect { TasksEffect.ShowError(error.message ?: "Unknown error") }
                 }
-                .collect { (tasks, isConnected) ->
+                .collect { (newTasks, isConnected) ->
                     setState {
                         copy(
                             isLoading = false,
                             error = null,
-                            tasks = tasks,
+                            tasks = newTasks.toImmutableList(),
                             isConnected = isConnected
                         )
                     }
@@ -69,7 +70,7 @@ class TaskViewModel(
                         copy(
                             isLoading = false,
                             error = null,
-                            tasks = tasks,
+                            tasks = it.toImmutableList(),
                         )
                     }
                 }
@@ -80,8 +81,4 @@ class TaskViewModel(
         }
 
     }
-
-//    private fun selectTask(taskId: String) {
-//        setEffect { TasksEffect.NavigateToTaskDetail(taskId) }
-//    }
 }

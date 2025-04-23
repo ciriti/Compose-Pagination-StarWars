@@ -33,8 +33,12 @@ class TaskDetailViewModel(
         viewModelScope.launch {
             setState { copy(isLoading = true) }
             taskRepository.getTaskById(taskId)
-                .onSuccess { task ->
-                    setState { copy(task = task, isLoading = false) }
+                .onSuccess { newTask ->
+                    if (newTask != state.value.task) {
+                        setState { copy(task = newTask, isLoading = false) }
+                    } else {
+                        setState { copy(isLoading = false) }
+                    }
                 }
                 .onFailure { error ->
                     setState { copy(isLoading = false, error = error.message) }

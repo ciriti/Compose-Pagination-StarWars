@@ -80,6 +80,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.kotlinx.collections.immutable)
 
     testImplementation(libs.koin.test)
     testImplementation(libs.koin.test.junit4)
