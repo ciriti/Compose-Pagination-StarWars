@@ -94,7 +94,7 @@ fun TaskScreenContent(
 }
 
 @Composable
-private fun TaskListContent(
+fun TaskListContent(
     tasks: List<Task>,
     isConnected: Boolean,
     onTaskClick: (String) -> Unit,
@@ -115,7 +115,7 @@ private fun TaskListContent(
 }
 
 @Composable
-private fun EmptyContent(
+fun EmptyContent(
     isConnected: Boolean,
     onRefresh: () -> Unit,
     modifier: Modifier,
