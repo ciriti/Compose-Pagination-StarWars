@@ -1,20 +1,43 @@
-# Star Wars App
+# Train Maintenance Tracker
 
-## Features
-- Fetch and display a paginated list of Star Wars characters.
-- View detailed profiles of individual characters.
-- Offline caching of previously fetched data.
+An offline-first Android application for train technicians to view maintenance tasks, designed to work seamlessly with intermittent connectivity.
 
-## Use Cases Covered
-- **Fetching a paginated list of people**: Retrieves and caches a list of Star Wars characters.
-- **Loading additional pages**: Fetches more pages as the user scrolls.
-- **Viewing a person's details**: Displays detailed information about a character.
-- **Handling errors and displaying messages**: Catches network failures and server errors.
-- **Handling empty responses**: Manages cases where the API returns no data.
-- **Caching mechanism**: Expires cached data after 2 minutes to balance freshness and efficiency.
+## Architecture Overview
 
-### Edge Cases Considered
-- **Rapid Pagination Requests**: The app prevents multiple simultaneous requests when fetching new pages.
-- **Empty API Responses**: If the API returns an empty list, the app does not attempt further requests.
-- **Cache Handling**: Cached data older than 2 minutes is discarded and refreshed from the API.
-- **Handling Last Page Scenarios**: If no additional pages exist, the app does not trigger unnecessary API calls.
+### Core Principles
+- **Offline-First** - Prioritizes local data with graceful network fallback
+- **Unidirectional Data Flow** - Clear separation between UI and business logic
+- **Reactive UI** - Compose-based interface responding to state changes
+- **Modular Design** - Strict separation of concerns via clean architecture layers
+
+### Technical Stack
+- **Kotlin**
+- **Jetpack Compose**
+- **Koin**
+- **Room**
+- **Retrofit**
+- **Coroutines/Flow**
+
+
+#### Layer Responsibilities:
+
+1. **Data Layer**
+    - `datasource/`: Concrete implementations for API (Remote) and DB (Local)
+    - `repository/`: Mediates between sources, handles business logic
+    - `sync/`: Manages offline-first synchronization
+
+2. **Domain Layer**
+    - Entity definitions
+    - Use cases/interfaces
+    - Pure Kotlin (no Android dependencies)
+
+3. **UI Layer**
+    - Compose-based presentation
+    - State hoisting to ViewModels
+    - Theming and component library
+
+## Setup
+
+1. Clone repository
+2. Open in Android Studio (latest stable version)
+3. Build and run
