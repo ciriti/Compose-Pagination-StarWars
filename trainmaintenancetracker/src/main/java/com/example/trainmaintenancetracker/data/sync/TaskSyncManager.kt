@@ -38,9 +38,6 @@ class TaskSyncManagerImpl(
                     val entityTas = it.map { dto -> dto.toEntity() }
                     localDataSource.insertTasks(entityTas)
                 }
-                .onFailure {
-                    println("$it")
-                }
         }
 
     }

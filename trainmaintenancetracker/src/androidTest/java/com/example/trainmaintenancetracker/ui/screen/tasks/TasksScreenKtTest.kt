@@ -18,17 +18,7 @@ class TasksScreenKtTest {
     @Test
     fun offlineBannerIsDisplayedWhenDisconnected() {
         // Arrange
-        val testTasks = listOf(
-            Task(
-                taskId = "1",
-                trainId = "TR-123",
-                taskType = "Inspection",
-                priorityLevel = "High",
-                location = "Depot A",
-                dueDate = "2023-12-01",
-                description = "Full inspection required"
-            )
-        )
+        val testTasks = listOf(testTask1)
 
         // Act
         composeTestRule.setContent {
@@ -58,17 +48,7 @@ class TasksScreenKtTest {
     @Test
     fun offlineBannerIsHiddenWhenConnected() {
         // Arrange
-        val testTasks = listOf(
-            Task(
-                taskId = "1",
-                trainId = "TR-123",
-                taskType = "Inspection",
-                priorityLevel = "High",
-                location = "Depot A",
-                dueDate = "2023-12-01",
-                description = "Full inspection required"
-            )
-        )
+        val testTasks = listOf(testTask1)
 
         // Act
         composeTestRule.setContent {
@@ -93,5 +73,48 @@ class TasksScreenKtTest {
         // Assert
         composeTestRule.onNodeWithText("Offline mode - data may not be up to date")
             .assertDoesNotExist()
+    }
+
+    @Test
+    fun taskListDisplaysCorrectItems() {
+        // Arrange
+        val testTasks = listOf(testTask1, testData2)
+
+        // Act
+        composeTestRule.setContent {
+            TaskListContent(
+                tasks = testTasks,
+                isConnected = true,
+                onTaskClick = {},
+                offlineBanner = { _ -> },
+                taskItem = { task, _ ->
+                    Text(text = "${task.taskType} - ${task.location}")
+                }
+            )
+        }
+
+        // Assert
+        composeTestRule.onNodeWithText("Inspection - Depot A").assertExists()
+        composeTestRule.onNodeWithText("Maintenance - Depot B").assertExists()
+    }
+
+    @Test
+    fun errorStateDisplaysErrorMessage() {
+        // Arrange
+        val errorMessage = "Failed to load tasks"
+
+        // Act
+        composeTestRule.setContent {
+            TaskScreenContent(
+                onTaskSelected = {},
+                onRefresh = {},
+                state = TasksState(error = errorMessage),
+                offlineBanner = { _ -> },
+                taskItem = { _, _ -> },
+            )
+        }
+
+        // Assert
+        composeTestRule.onNodeWithText(errorMessage).assertExists()
     }
 }
