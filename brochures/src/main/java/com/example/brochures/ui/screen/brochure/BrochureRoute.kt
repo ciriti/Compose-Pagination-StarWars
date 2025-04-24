@@ -22,6 +22,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
@@ -39,6 +40,7 @@ import com.example.brochures.domain.model.Brochure
 import com.example.brochures.ui.component.ErrorContent
 import com.example.brochures.ui.component.FilterSwitch
 import com.example.brochures.ui.component.LoadingIndicator
+import kotlinx.collections.immutable.toImmutableList
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -48,6 +50,13 @@ fun BrochureRoute(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val context = LocalContext.current
+    val configuration = LocalConfiguration.current
+    val spanCount = remember(configuration.orientation) {
+        when (configuration.orientation) {
+            Configuration.ORIENTATION_LANDSCAPE -> 3
+            else -> 2
+        }
+    }
 
     LaunchedEffect(viewModel) {
         viewModel.effect.collect { effect ->
@@ -63,6 +72,7 @@ fun BrochureRoute(
         state = state,
         onFilterChanged = { viewModel.processIntent(BrochureIntent.FilterByDistance(it)) },
         onRetry = { viewModel.processIntent(BrochureIntent.LoadBrochures) },
+        spanCount = spanCount,
         modifier = modifier
     )
 }
@@ -73,6 +83,7 @@ internal fun BrochureScreen(
     state: BrochureState,
     onRetry: () -> Unit,
     onFilterChanged: (Boolean) -> Unit,
+    spanCount: Int,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
@@ -100,7 +111,8 @@ internal fun BrochureScreen(
                 )
 
                 else -> BrochureListContent(
-                    brochures = state.brochures
+                    brochures = state.brochures,
+                    spanCount = spanCount
                 )
             }
         }
@@ -110,14 +122,9 @@ internal fun BrochureScreen(
 @Composable
 private fun BrochureListContent(
     brochures: List<Brochure>,
-    modifier: Modifier = Modifier
+    spanCount: Int,
+    modifier: Modifier = Modifier,
 ) {
-    val configuration = LocalConfiguration.current
-    val spanCount = when (configuration.orientation) {
-        Configuration.ORIENTATION_LANDSCAPE -> 3
-        else -> 2
-    }
-
     LazyVerticalGrid(
         columns = GridCells.Fixed(spanCount),
         contentPadding = PaddingValues(8.dp),
@@ -178,19 +185,37 @@ fun BrochureItem(
     }
 }
 
-@Preview(name = "Portrait", widthDp = 360, heightDp = 640)
+
 @Preview(name = "Landscape", widthDp = 640, heightDp = 360)
 @Composable
-private fun BrochureScreenPreview() {
+private fun BrochureScreenPreviewLandscape() {
     MaterialTheme {
         BrochureScreen(
             state = BrochureState(
-                brochures = sampleBrochures,
+                brochures = sampleBrochures.toImmutableList(),
                 filterByDistance = true
             ),
             onFilterChanged = {},
             onRetry = {},
-            modifier = Modifier.fillMaxSize()
+            spanCount = 3,
+            modifier = Modifier.fillMaxSize(),
+        )
+    }
+}
+
+@Preview(name = "Portrait", widthDp = 360, heightDp = 640)
+@Composable
+private fun BrochureScreenPreviewPortrait() {
+    MaterialTheme {
+        BrochureScreen(
+            state = BrochureState(
+                brochures = sampleBrochures.toImmutableList(),
+                filterByDistance = true
+            ),
+            onFilterChanged = {},
+            onRetry = {},
+            spanCount = 2,
+            modifier = Modifier.fillMaxSize(),
         )
     }
 }

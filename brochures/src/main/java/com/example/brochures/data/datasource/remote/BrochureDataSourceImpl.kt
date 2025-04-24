@@ -1,5 +1,7 @@
 package com.example.brochures.data.datasource.remote
 
+import com.example.brochures.domain.EmptyResponseException
+import com.example.brochures.domain.datasource.remote.BrochureDataSource
 import com.example.brochures.domain.getException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +20,7 @@ class BrochureDataSourceImpl(
             val response = api.getBrochures()
             if (response.isSuccessful) {
                 val brochureResponse = response.body()
-                    ?: throw RuntimeException("Empty response") // TODO create custom exception
+                    ?: throw EmptyResponseException("Empty response")
                 brochureResponse.embedded.contents
                     .filter { it.isBrochure() }
             } else {

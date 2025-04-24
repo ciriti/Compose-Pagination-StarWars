@@ -1,9 +1,12 @@
 package com.example.brochures.ui.screen.brochure
 
 import androidx.lifecycle.viewModelScope
-import com.example.brochures.data.repository.BrochureRepository
+import com.example.brochures.domain.datasource.repository.BrochureRepository
 import com.example.brochures.domain.model.Brochure
 import com.example.brochures.ui.component.BaseViewModel
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.launch
 
 class BrochureViewModel(
@@ -14,7 +17,7 @@ class BrochureViewModel(
         loadBrochures()
     }
 
-    private var originalBrochures: List<Brochure> = emptyList()
+    private var originalBrochures: ImmutableList<Brochure> = persistentListOf()
 
     override fun createInitialState(): BrochureState = BrochureState()
 
@@ -30,10 +33,10 @@ class BrochureViewModel(
             setState { copy(isLoading = true) }
             repository.getBrochures()
                 .onSuccess {
-                    originalBrochures = it
+                    originalBrochures = it.toImmutableList()
                     setState {
                         copy(
-                            brochures = it,
+                            brochures = originalBrochures,
                             isLoading = false,
                             error = null
                         )
@@ -50,7 +53,7 @@ class BrochureViewModel(
         setState {
             copy(
                 brochures = when {
-                    enabled -> originalBrochures.filter { (it.distance ?: 0.0) < 5.0 }
+                    enabled -> originalBrochures.filter { (it.distance ?: 0.0) < 5.0 }.toImmutableList()
                     else -> originalBrochures
                 },
                 filterByDistance = enabled

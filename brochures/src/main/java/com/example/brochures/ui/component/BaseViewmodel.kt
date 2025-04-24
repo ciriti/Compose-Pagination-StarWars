@@ -28,7 +28,7 @@ abstract class BaseViewModel<I : UiIntent, S : UiState, E : UiEffect> : ViewMode
         }
     }
 
-    protected abstract fun handleIntent(intent: I)
+    public abstract fun handleIntent(intent: I)
 
     protected fun setState(reducer: S.() -> S) {
         _state.update(reducer)

@@ -1,14 +1,11 @@
 package com.example.brochures.di
 
-import coil.ImageLoader
-import coil.request.CachePolicy
 import com.example.brochures.data.datasource.remote.BrochureApi
-import com.example.brochures.data.datasource.remote.BrochureDataSource
+import com.example.brochures.domain.datasource.remote.BrochureDataSource
 import com.example.brochures.data.datasource.remote.BrochureDataSourceImpl
 import com.example.brochures.data.datasource.remote.BrochureResponse
 import com.example.brochures.data.datasource.remote.BrochureResponseDeserializer
-import com.example.brochures.data.datasource.remote.ContentDto
-import com.example.brochures.data.repository.BrochureRepository
+import com.example.brochures.domain.datasource.repository.BrochureRepository
 import com.example.brochures.data.repository.BrochureRepositoryImpl
 import com.example.brochures.ui.screen.brochure.BrochureViewModel
 import com.google.gson.GsonBuilder

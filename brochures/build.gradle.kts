@@ -73,6 +73,7 @@ dependencies {
     implementation(libs.room.ktx)
     implementation(libs.androidx.work.runtime.ktx)
     ksp(libs.room.annotation)
+    implementation(libs.kotlinx.collections.immutable)
 
     implementation(libs.coil.compose)
 

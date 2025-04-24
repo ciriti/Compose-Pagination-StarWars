@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.example.brochures.ui.navigation.Route
 import com.example.brochures.ui.navigation.brochuresGraph
 import com.example.brochures.ui.theme.BrochuresTheme
 
@@ -25,10 +26,10 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(
                     navController = navController,
-                    startDestination = "brochures",
+                    startDestination = Route.Brochures.route,
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    brochuresGraph(navController)
+                    brochuresGraph()
                 }
             }
         }
